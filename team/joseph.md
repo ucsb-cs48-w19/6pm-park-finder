@@ -1,0 +1,1 @@
+My name is Joseph. I am a 3rd year student at UCSB, and I recently switched into the computer sciecne major. I am eager to learn and develop more skills in the field. 
