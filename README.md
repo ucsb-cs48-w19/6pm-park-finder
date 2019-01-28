@@ -14,7 +14,11 @@ Have you ever needed to quickly find a new park? Are you a picky parker? Look no
 
 ### Prerequisites
 
-IOS 8.0.0
+Unity 2018.3.0
+
+### Dependancy
+
+None
 
 ### Installation Steps
 
@@ -23,7 +27,11 @@ Download from apple store later
 
 ## Functionality
 
-Nothing as of yet
+Using IOS at least 8.0.0
+
+Open app from IPhone
+
+Map should come up
 
 ## Known Problems
 
