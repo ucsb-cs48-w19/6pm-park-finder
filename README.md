@@ -1,1 +1,45 @@
-# 6pm-park-finder
+# Park-Finder
+
+## Project summary
+
+### One-sentence description of the project
+
+YELP for Parks! Helps avid tree-huggers find the right park!
+
+### Additional information about the project
+
+Have you ever needed to quickly find a new park? Are you a picky parker? Look no further! Park Finder is a onestop app to find all the parks you ever need. Contains a simple searching feature with a list of all your favorite nearby Currently under development.
+
+## Installation
+
+### Prerequisites
+
+IOS 8.0.0
+
+### Installation Steps
+
+Private right now. Talk to a developer
+Download from apple store later
+
+## Functionality
+
+Nothing as of yet
+
+## Known Problems
+
+None
+
+## Contributing
+
+TODO: Leave the steps below if you want others to contribute to your project.
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+
+## License
+
+MIT
+
