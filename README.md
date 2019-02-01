@@ -16,14 +16,15 @@ Have you ever needed to quickly find a new park? Are you a picky parker? Look no
 
 Unity 2018.3.0
 
-### Dependancy
+### Dependency
 
 None
 
 ### Installation Steps
 
 Private right now. Talk to a developer
-Download from apple store later
+Download from apple store later\
+After cloning this repo, open the repo directory on master through Unity. You may develop through the Unity app.\
 
 ## Functionality
 
