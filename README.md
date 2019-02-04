@@ -4,7 +4,7 @@
 
 ### One-sentence description of the project
 
-YELP for Parks! Helps avid tree-huggers find the perfect park!
+Friendly and useful park finder! Helps avid tree-huggers find the perfect park!
 
 ### Additional information about the project
 
