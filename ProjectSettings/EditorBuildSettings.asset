@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Scenes/HelloWorld2.unity
+    guid: 376aa6408531841f9a2692d2827a1c58
+  - enabled: 1
+    path: Assets/_Scenes/ParkPage.unity
+    guid: 3ad024b53ef6f4b9c90cab6fb0c17711
   m_configObjects: {}
