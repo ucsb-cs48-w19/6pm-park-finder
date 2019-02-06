@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 0
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "913884799316-va4n5hgv0p3i12uaj6v7u53cbmek4vp9.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHxwLrOtmpjiqpH5n385fXJ59Y82jJOjU"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:913884799316:ios:60bb95643898e37d", 
+        "android_client_info": {
+          "package_name": "com.Company.ProductName"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "pm-park-finder.appspot.com", 
+    "project_id": "pm-park-finder", 
+    "firebase_url": "https://pm-park-finder.firebaseio.com", 
+    "project_number": "913884799316"
+  }
+}
