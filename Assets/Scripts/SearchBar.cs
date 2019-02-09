@@ -53,4 +53,9 @@ public class SearchBar : MonoBehaviour
 	{
 		searchObjects.Sort ((x, y) => x.name.CompareTo (y.name));
 	}
+
+    void OnMouseDown()
+    {
+        Debug.Log("CLICK REGISTTEREDD");
+    }
 }
