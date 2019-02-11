@@ -7,12 +7,12 @@ using UnityEngine;
 public class SearchableObject
 {
 	public GameObject searchObject;
-	public string name;
+    public string name;
 }
 
 public class SearchBar : MonoBehaviour
-{
-	public List<SearchableObject> searchObjects;
+{ 
+    public List<SearchableObject> searchObjects;
 
 	private List<SearchableObject> currentListings = new List<SearchableObject> ();
 
@@ -53,4 +53,9 @@ public class SearchBar : MonoBehaviour
 	{
 		searchObjects.Sort ((x, y) => x.name.CompareTo (y.name));
 	}
+
+    void OnMouseDown()
+    {
+        Debug.Log("CLICK REGISTTEREDD");
+    }
 }
