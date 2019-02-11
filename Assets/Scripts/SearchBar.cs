@@ -7,12 +7,12 @@ using UnityEngine;
 public class SearchableObject
 {
 	public GameObject searchObject;
-	public string name;
+    public string name;
 }
 
 public class SearchBar : MonoBehaviour
-{
-	public List<SearchableObject> searchObjects;
+{ 
+    public List<SearchableObject> searchObjects;
 
 	private List<SearchableObject> currentListings = new List<SearchableObject> ();
 
