@@ -6,8 +6,9 @@
 	using Mapbox.Unity.MeshGeneration.Factories;
 	using Mapbox.Unity.Utilities;
 	using System.Collections.Generic;
+    using System.IO;
 
-	public class SpawnOnMap : MonoBehaviour
+    public class SpawnOnMap : MonoBehaviour
 	{
 		[SerializeField]
 		AbstractMap _map;
@@ -25,9 +26,24 @@
 
 		List<GameObject> _spawnedObjects;
 
-		void Start()
-		{
-			_locations = new Vector2d[_locationStrings.Length];
+        string path = "Assets/Resources/park_locs.txt";
+
+
+        void Start()
+        {
+            //create location strings
+            _locationStrings = new string[4];
+            StreamReader sr = new System.IO.StreamReader(path);
+            string line;
+            int j = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                _locationStrings[j] = line;
+                j++;
+            }
+
+
+            _locations = new Vector2d[_locationStrings.Length];
 			_spawnedObjects = new List<GameObject>();
 			for (int i = 0; i < _locationStrings.Length; i++)
 			{
