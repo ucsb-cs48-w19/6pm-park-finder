@@ -751,12 +751,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301048839}
   m_CullTransparentMesh: 0
---- !u!1 &1465321343 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1133109452, guid: 7ae6fc62d3f4940cfa1520a8f26b2132,
-    type: 3}
-  m_PrefabInstance: {fileID: 843921207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900947550
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,4 +926,5 @@ MonoBehaviour:
   _map: {fileID: 2075172341}
   _locationStrings: []
   _spawnScale: 5
-  _markerPrefab: {fileID: 1465321343}
+  _markerPrefab: {fileID: 7157473025082153690, guid: cc8f8585b3dc94f9c980c40a12b7a0f7,
+    type: 3}
