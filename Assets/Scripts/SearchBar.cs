@@ -1,34 +1,72 @@
 ﻿using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine.UI;
 using UnityEngine;
+
 
 [System.Serializable]
 public class SearchableObject
 {
 	public GameObject searchObject;
-    public string name;
+
+    public SearchableObject(GameObject searchObject){
+        this.searchObject = searchObject;
+    }
 }
 
 public class SearchBar : MonoBehaviour
 { 
+
+    private static string path = "Assets/Resources/park_names.txt";
+
+    public GameObject modelObject;
+
     public List<SearchableObject> searchObjects;
 
 	private List<SearchableObject> currentListings = new List<SearchableObject> ();
 
 	void Start ()
 	{
+        addSearchObjectsFromDatabase();
 		Sort ();
 		currentListings.AddRange (searchObjects);
 		SetPositions ();
 	}
+
+    private void addSearchObjectsFromDatabase()
+    {
+        StreamReader sr = new System.IO.StreamReader(path);
+        string line;
+        while ((line = sr.ReadLine()) != null)
+        {
+            if (line != "" && !IsInSearchableObjects(line))
+            {
+                print("adding Parlk: " + line);
+                GameObject objToAdd = Instantiate(modelObject) as GameObject;
+                objToAdd.transform.parent = this.gameObject.transform;
+                objToAdd.name = line;
+                objToAdd.GetComponent<SearchBarObject>().setName();
+                searchObjects.Add(new SearchableObject(objToAdd));
+            }
+        }
+    }
+
+    private bool IsInSearchableObjects(string nameToCheck){
+        foreach(SearchableObject item in searchObjects){
+            if (item.searchObject.name == nameToCheck)
+                return true;
+        }
+        return false;
+    }
 
 	public void OnSearch (string currentText)
 	{
 		currentListings.Clear ();
 		List<SearchableObject> list = new List<SearchableObject> ();
 		foreach (SearchableObject oj in searchObjects) {
-			if (oj.name.StartsWith (currentText, StringComparison.InvariantCultureIgnoreCase)) {
+            if (oj.searchObject.name.StartsWith (currentText, StringComparison.InvariantCultureIgnoreCase)) {
 				oj.searchObject.SetActive (true);
 				list.Add (oj);
 			} else {
@@ -51,11 +89,6 @@ public class SearchBar : MonoBehaviour
 
 	void Sort ()
 	{
-		searchObjects.Sort ((x, y) => x.name.CompareTo (y.name));
+        searchObjects.Sort ((x, y) => x.searchObject.name.CompareTo (y.searchObject.name));
 	}
-
-    void OnMouseDown()
-    {
-        Debug.Log("CLICK REGISTTEREDD");
-    }
 }
