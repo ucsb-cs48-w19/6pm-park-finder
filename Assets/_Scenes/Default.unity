@@ -925,6 +925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _map: {fileID: 2075172341}
   _locationStrings: []
-  _spawnScale: 5
+  _spawnScale: 10
   _markerPrefab: {fileID: 7157473025082153690, guid: cc8f8585b3dc94f9c980c40a12b7a0f7,
     type: 3}
