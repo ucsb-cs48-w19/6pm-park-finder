@@ -8,8 +8,8 @@ using UnityEngine.Networking;
 public class LoadParkPage : MonoBehaviour
 {
     private static string path = "Assets/Resources/parks.txt";
-    private static string phpUrl = "";
-    private static string perlUrl = "https://files.000webhost.com/park_request.pl";
+    private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/park_request2.php";
+    private static string perlUrl = "https://server-for-parkfinder.000webhostapp.com/park_request.pl";
     private static string description = "";
 
     public Text Name;
@@ -25,6 +25,11 @@ public class LoadParkPage : MonoBehaviour
         Description.text = description;
     }
 
+    private void Update()
+    {
+        Description.text = description;
+    }
+
     private IEnumerator GetDescription()
     {
         Debug.Log("IN DATABASE FUNCTION");
@@ -36,8 +41,11 @@ public class LoadParkPage : MonoBehaviour
 
         //returns the description
         var parkCharacteristics = UnityWebRequest.Post(phpUrl, form);
+        //WWW parkCharacteristics = new WWW(phpUrl, form);
 
         yield return parkCharacteristics.SendWebRequest();
+        //yield return parkCharacteristics;
+
 
         if (parkCharacteristics.isNetworkError || parkCharacteristics.isHttpError)
         {
@@ -52,6 +60,9 @@ public class LoadParkPage : MonoBehaviour
             Debug.Log(parkCharacteristics.downloadHandler.text);
             description = parkCharacteristics.downloadHandler.text;
         }
+
+        //Debug.Log("ABOUT TO PRINT OBJECT");
+        //Debug.Log(parkCharacteristics.text);
 
     }
 
