@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
-
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class SearchableObject
@@ -20,6 +20,7 @@ public class SearchBar : MonoBehaviour
 { 
 
     private static string path = "Assets/Resources/park_names.txt";
+    private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
 
     public GameObject modelObject;
 
@@ -29,14 +30,54 @@ public class SearchBar : MonoBehaviour
 
 	void Start ()
 	{
-        addSearchObjectsFromDatabase();
-		Sort ();
-		currentListings.AddRange (searchObjects);
-		SetPositions ();
-	}
+        var coroutine = addSearchObjectsFromDatabase();
+        StartCoroutine(coroutine);
+    }
 
-    private void addSearchObjectsFromDatabase()
+    private void Update()
     {
+
+    }
+
+    private IEnumerator addSearchObjectsFromDatabase()
+    {
+        Debug.Log("IN ADD SEARCH OBJECTS");
+        //make a database query
+        //returns the description
+        var parkNames = UnityWebRequest.Get(phpUrl);
+        //WWW parkCharacteristics = new WWW(phpUrl, form);
+
+        yield return parkNames.SendWebRequest();
+        //yield return parkCharacteristics;
+
+
+        if (parkNames.isNetworkError || parkNames.isHttpError)
+        {
+            print("Error downloading: " + parkNames.error);
+            //description = "error";
+            Debug.Log("ERROR");
+        }
+        else
+        {
+            // show the highscores
+            Debug.Log("ABOUT TO PRINT OBJECT");
+            Debug.Log(parkNames.downloadHandler.text);
+            //description = parkCharacteristics.downloadHandler.text;
+            string[] ParkNames = parkNames.downloadHandler.text.Split('\n');
+            foreach (string parkName in ParkNames)
+            {
+                if (parkName == "") continue;
+                GameObject objToAdd = Instantiate(modelObject) as GameObject;
+                objToAdd.transform.parent = this.gameObject.transform;
+                objToAdd.name = parkName;
+                objToAdd.GetComponent<SearchBarObject>().setName();
+                searchObjects.Add(new SearchableObject(objToAdd));
+            }
+        }
+        Sort();
+        currentListings.AddRange(searchObjects);
+        SetPositions();
+        /*
         StreamReader sr = new System.IO.StreamReader(path);
         string line;
         while ((line = sr.ReadLine()) != null)
@@ -51,6 +92,7 @@ public class SearchBar : MonoBehaviour
                 searchObjects.Add(new SearchableObject(objToAdd));
             }
         }
+        */
     }
 
     private bool IsInSearchableObjects(string nameToCheck){
