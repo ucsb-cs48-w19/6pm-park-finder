@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Networking;
+using  System.Globalization ;
 
 [System.Serializable]
 public class SearchableObject
@@ -19,8 +20,7 @@ public class SearchableObject
 public class SearchBar : MonoBehaviour
 { 
 
-    private static string path = "Assets/Resources/park_names.txt";
-    private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
+    private static string phpUrlNames = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
 
     public GameObject modelObject;
 
@@ -44,8 +44,8 @@ public class SearchBar : MonoBehaviour
         Debug.Log("IN ADD SEARCH OBJECTS");
         //make a database query
         //returns the description
-        var parkNames = UnityWebRequest.Get(phpUrl);
-        //WWW parkCharacteristics = new WWW(phpUrl, form);
+        var parkNames = UnityWebRequest.Get(phpUrlNames);
+        //WWW parkCharacteristics = new WWW(phpUrlNames, form);
 
         yield return parkNames.SendWebRequest();
         //yield return parkCharacteristics;
@@ -63,14 +63,19 @@ public class SearchBar : MonoBehaviour
             Debug.Log("ABOUT TO PRINT OBJECT");
             Debug.Log(parkNames.downloadHandler.text);
             //description = parkCharacteristics.downloadHandler.text;
-            string[] ParkNames = parkNames.downloadHandler.text.Split('\n');
-            foreach (string parkName in ParkNames)
+            string[] ParkNamesLocs = parkNames.downloadHandler.text.Split('\n');
+            for (int ii = 0 ; ii < ParkNamesLocs.Length ; ii += 2)
             {
+				string parkName = ParkNamesLocs[ii] ;
                 if (parkName == "") continue;
+				string[] ll = ParkNamesLocs[ii + 1].Split(',') ;
+				double lat = double.Parse(ll[0], CultureInfo.InvariantCulture) ;
+				double lon = double.Parse(ll[1], CultureInfo.InvariantCulture) ;
                 GameObject objToAdd = Instantiate(modelObject) as GameObject;
                 objToAdd.transform.parent = this.gameObject.transform;
                 objToAdd.name = parkName;
                 objToAdd.GetComponent<SearchBarObject>().setName();
+				objToAdd.GetComponent<SearchBarObject>().setLatLong(lat, lon) ;
                 searchObjects.Add(new SearchableObject(objToAdd));
             }
         }

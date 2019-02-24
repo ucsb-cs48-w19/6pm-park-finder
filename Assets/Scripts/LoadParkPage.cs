@@ -25,10 +25,10 @@ public class LoadParkPage : MonoBehaviour
         Description.text = description;
     }
 
-    private void Update()
-    {
-        Description.text = description;
-    }
+    /* private void Update() */
+    /* { */
+    /*     Description.text = description; */
+    /* } */
 
     private IEnumerator GetDescription()
     {
@@ -61,6 +61,7 @@ public class LoadParkPage : MonoBehaviour
             Debug.Log(parkCharacteristics.downloadHandler.text);
             description = parkCharacteristics.downloadHandler.text;
         }
+		Description.text = description ;
 
         //Debug.Log("ABOUT TO PRINT OBJECT");
         //Debug.Log(parkCharacteristics.text);
