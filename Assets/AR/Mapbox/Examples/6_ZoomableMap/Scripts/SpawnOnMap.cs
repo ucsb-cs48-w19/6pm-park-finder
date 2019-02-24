@@ -104,7 +104,7 @@
 
         private void Update()
         {
-            if (_spawnedObjects.Count > 0)
+            if (_spawnedObjects != null)
             {
                 int count = _spawnedObjects.Count;
                 for (int i = 0; i < count; i++)
