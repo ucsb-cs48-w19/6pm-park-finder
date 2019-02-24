@@ -15,8 +15,19 @@ public class LoadParkPage : MonoBehaviour
     public Text Name;
     public Text Description;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("IN START FUNCTIN");
+        Name.text = GetName();
+        IEnumerator coroutine = GetDescription();
+        StartCoroutine(coroutine);
+        Description.text = description;
+    }
+
     private IEnumerator GetDescription()
     {
+        Debug.Log("IN DATABASE FUNCTION");
         //query database
         WWWForm form = new WWWForm();
 
@@ -37,23 +48,13 @@ public class LoadParkPage : MonoBehaviour
         else
         {
             // show the highscores
+            Debug.Log("ABOUT TO PRINT OBJECT");
             Debug.Log(parkCharacteristics.downloadHandler.text);
             description = parkCharacteristics.downloadHandler.text;
         }
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Name.text = GetName();
-        GetDescription();
-        Description.text = description;
-    }
-
-
-
-    //private IEnumerator query
 
     private string GetName()
     {
