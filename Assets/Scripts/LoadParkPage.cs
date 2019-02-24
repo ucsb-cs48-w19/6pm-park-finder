@@ -32,12 +32,13 @@ public class LoadParkPage : MonoBehaviour
 
     private IEnumerator GetDescription()
     {
-        Debug.Log("IN DATABASE FUNCTION");
+        //Debug.Log("IN DATABASE FUNCTION");
         //query database
         WWWForm form = new WWWForm();
 
         //add park name field to the post
-        form.AddField("ParkName", GetName());
+        string name = clean(GetName());
+        form.AddField("ParkName", name);
 
         //returns the description
         var parkCharacteristics = UnityWebRequest.Post(phpUrl, form);
@@ -66,6 +67,23 @@ public class LoadParkPage : MonoBehaviour
 
     }
 
+    private string clean(string str)
+    {
+        string retStr = "";
+        
+        foreach(char c in str)
+        {
+            if(c == '\'')
+            {
+
+                retStr += '\''; // add escape character
+            }
+            retStr += c;
+        }
+        Debug.Log(retStr);
+
+        return retStr;
+    }
 
     private string GetName()
     {
