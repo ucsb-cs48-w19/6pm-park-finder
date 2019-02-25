@@ -5,7 +5,10 @@ using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Networking;
-using  System.Globalization ;
+using System.Globalization ;
+using Mapbox.Unity.Location ;
+using Mapbox.Utils ;
+using Mapbox.Unity.Utilities ;
 
 [System.Serializable]
 public class SearchableObject
@@ -28,14 +31,24 @@ public class SearchBar : MonoBehaviour
 
 	private List<SearchableObject> currentListings = new List<SearchableObject> ();
 
+	private Vector2d currentLocation = new Vector2d(0.0, 0.0) ;
+
 	void Start ()
 	{
+		// use DeviceLocationProvider instead of EditorLocationProvider for production
+		/* EditorLocationProvider dd = new EditorLocationProvider() ; */
+		/* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
+		currentLocation[0] = 34.413963 ;
+		currentLocation[1] = -119.848946 ;
+		currentLocation = Conversions.LatLonToMeters(currentLocation) ;
         var coroutine = addSearchObjectsFromDatabase();
         StartCoroutine(coroutine);
     }
 
     private void Update()
     {
+		/* EditorLocationProvider dd = new EditorLocationProvider() ; */
+		/* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
 
     }
 
@@ -60,6 +73,7 @@ public class SearchBar : MonoBehaviour
         else
         {
             // show the highscores
+			// update distances only on loading of scene
             Debug.Log("ABOUT TO PRINT OBJECT");
             Debug.Log(parkNames.downloadHandler.text);
             //description = parkCharacteristics.downloadHandler.text;
@@ -74,12 +88,14 @@ public class SearchBar : MonoBehaviour
                 GameObject objToAdd = Instantiate(modelObject) as GameObject;
                 objToAdd.transform.parent = this.gameObject.transform;
                 objToAdd.name = parkName;
-                objToAdd.GetComponent<SearchBarObject>().setName();
-				objToAdd.GetComponent<SearchBarObject>().setLatLong(lat, lon) ;
+				SearchBarObject ss = objToAdd.GetComponent<SearchBarObject>() ;
+				ss.setName();
+				ss.setLatLong(lat, lon) ;
+				ss.Distance = Vector2d.Distance(Conversions.LatLonToMeters(ss.getLatLong()), currentLocation) ;
                 searchObjects.Add(new SearchableObject(objToAdd));
             }
         }
-        Sort();
+        SortLex();
         currentListings.AddRange(searchObjects);
         SetPositions();
         /*
@@ -125,7 +141,7 @@ public class SearchBar : MonoBehaviour
 		SetPositions ();
 	}
 
-	void SetPositions ()
+	public void SetPositions ()
 	{
 		if (currentListings.Count < 0)
 			return;
@@ -134,8 +150,22 @@ public class SearchBar : MonoBehaviour
 		}
 	}
 
-	void Sort ()
+	public void ReorderLex() {
+        currentListings.Sort ((x, y) => x.searchObject.name.CompareTo (y.searchObject.name));
+		SetPositions() ;
+		
+	}
+	public void ReorderLoc() {
+		currentListings.Sort ((x, y) => x.searchObject.GetComponent<SearchBarObject>().Distance.CompareTo (y.searchObject.GetComponent<SearchBarObject>().Distance)) ;
+		SetPositions() ;
+		foreach (SearchableObject oj in currentListings) {
+			Debug.Log(oj.searchObject.GetComponent<SearchBarObject>().Distance.ToString("0.000000")) ;
+		}
+	}
+
+	void SortLex ()
 	{
         searchObjects.Sort ((x, y) => x.searchObject.name.CompareTo (y.searchObject.name));
 	}
+
 }
