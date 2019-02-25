@@ -1,6 +1,6 @@
 #! /bin/sh
 
-project="<YOUR PROJECT NAME HERE>"
+project="6pm-park-finder"
 
 echo "Attempting to build $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity 
