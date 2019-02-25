@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mapbox.Utils;
 
 public class SearchBarObject : MonoBehaviour
 {
 
     public Text nameText;
-	private double[] latLong = new double[2] ;
+	private Vector2d latLong = new Vector2d(0, 0) ;
+	private double distance = 0 ;
+
+	public double Distance {
+		get {
+			return distance ;
+		}
+		set {
+			distance = value ;
+		}
+	}
 
     public void setName()
     {
@@ -21,7 +32,7 @@ public class SearchBarObject : MonoBehaviour
 		/* Debug.Log(latLong[1].ToString("0.000000")) ; */
 	}
 
-	public double[] getLatLong() {
+	public Vector2d getLatLong() {
 		return latLong ;
 	}
 }
