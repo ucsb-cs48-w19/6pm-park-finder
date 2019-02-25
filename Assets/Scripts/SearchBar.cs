@@ -86,7 +86,7 @@ public class SearchBar : MonoBehaviour
 				double lat = double.Parse(ll[0], CultureInfo.InvariantCulture) ;
 				double lon = double.Parse(ll[1], CultureInfo.InvariantCulture) ;
                 GameObject objToAdd = Instantiate(modelObject) as GameObject;
-                objToAdd.transform.parent = this.gameObject.transform;
+                objToAdd.transform.SetParent(this.gameObject.transform);
                 objToAdd.name = parkName;
 				SearchBarObject ss = objToAdd.GetComponent<SearchBarObject>() ;
 				ss.setName();
