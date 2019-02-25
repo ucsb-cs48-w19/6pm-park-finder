@@ -23,7 +23,7 @@ public class SearchableObject
 public class SearchBar : MonoBehaviour
 { 
 
-    private static string phpUrlNames = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
+    private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
 
     public GameObject modelObject;
 
@@ -57,8 +57,8 @@ public class SearchBar : MonoBehaviour
         Debug.Log("IN ADD SEARCH OBJECTS");
         //make a database query
         //returns the description
-        var parkNames = UnityWebRequest.Get(phpUrlNames);
-        //WWW parkCharacteristics = new WWW(phpUrlNames, form);
+        var parkNames = UnityWebRequest.Get(phpUrl);
+        //WWW parkCharacteristics = new WWW(phpUrl, form);
 
         yield return parkNames.SendWebRequest();
         //yield return parkCharacteristics;
@@ -98,23 +98,7 @@ public class SearchBar : MonoBehaviour
         SortLex();
         currentListings.AddRange(searchObjects);
         SetPositions();
-        /*
-        StreamReader sr = new System.IO.StreamReader(path);
-        string line;
-        while ((line = sr.ReadLine()) != null)
-        {
-            if (line != "" && !IsInSearchableObjects(line))
-            {
-                print("adding Parlk: " + line);
-                GameObject objToAdd = Instantiate(modelObject) as GameObject;
-                objToAdd.transform.parent = this.gameObject.transform;
-                objToAdd.name = line;
-                objToAdd.GetComponent<SearchBarObject>().setName();
-                searchObjects.Add(new SearchableObject(objToAdd));
-            }
-        }
-        */
-    }
+	}
 
     private bool IsInSearchableObjects(string nameToCheck){
         foreach(SearchableObject item in searchObjects){
@@ -158,9 +142,6 @@ public class SearchBar : MonoBehaviour
 	public void ReorderLoc() {
 		currentListings.Sort ((x, y) => x.searchObject.GetComponent<SearchBarObject>().Distance.CompareTo (y.searchObject.GetComponent<SearchBarObject>().Distance)) ;
 		SetPositions() ;
-		foreach (SearchableObject oj in currentListings) {
-			Debug.Log(oj.searchObject.GetComponent<SearchBarObject>().Distance.ToString("0.000000")) ;
-		}
 	}
 
 	void SortLex ()
