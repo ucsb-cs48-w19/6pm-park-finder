@@ -8,7 +8,7 @@ VERSION=2018.3.11
 download() {
   file=$1
   # url="$BASE_URL/$HASH/$package"
-  url="https://download.unity3d.com/download_unity/88933597c842/MacEditorInstaller/Unity-2018.2.17f1.pkg?_ga=2.168044710.686183865.1550968454-48958660.1547513121"
+  url="https://download.unity3d.com/download_unity/88933597c842/MacEditorInstaller/Unity-2018.3.4f1.pkg?_ga=2.168044710.686183865.1550968454-48958660.1547513121"
 #url="https://download.unity3d.com/download_unity/bb579dc42f1d/UnityDownloadAssistant.dmg"
 
   echo "Downloading from $url: "
@@ -28,6 +28,6 @@ install() {
 # of available packages, where PLATFORM is `osx` or `win`
 
 install "MacEditorInstaller/Unity-$VERSION.pkg"
-#install "MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-$VERSION.pkg"
+install "MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-$VERSION.pkg"
 install "MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-$VERSION.pkg"
 install "MacEditorTargetInstaller/UnitySetup-Linux-Support-for-Editor-$VERSION.pkg"
