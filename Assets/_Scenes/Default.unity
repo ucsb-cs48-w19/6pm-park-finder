@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 2
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -713,7 +713,7 @@ PrefabInstance:
     - target: {fileID: 5585594402201480809, guid: ec87d6c49c1724f7783c70e4ed5f87d1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5585594402201480809, guid: ec87d6c49c1724f7783c70e4ed5f87d1,
         type: 3}
@@ -723,7 +723,7 @@ PrefabInstance:
     - target: {fileID: 5585594402201480809, guid: ec87d6c49c1724f7783c70e4ed5f87d1,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5585594402201480809, guid: ec87d6c49c1724f7783c70e4ed5f87d1,
         type: 3}
@@ -754,11 +754,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5585594402398758974, guid: ec87d6c49c1724f7783c70e4ed5f87d1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec87d6c49c1724f7783c70e4ed5f87d1, type: 3}
