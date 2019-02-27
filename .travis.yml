@@ -6,8 +6,6 @@ before_install:
     - chmod a+x ./Scripts/build.sh
 
 install:
-  - npm install
   - ./Scripts/install.sh
 script:
   - ./Scripts/build.sh
-  - npm run build
