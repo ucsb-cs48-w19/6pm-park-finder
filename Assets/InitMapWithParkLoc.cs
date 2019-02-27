@@ -15,12 +15,17 @@
         private static Mapbox.Utils.Vector2d parkLocation;
         private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/get_park_loc_map.php";
 
+        [SerializeField]
+        AbstractMap _map;
+
+        ILocationProvider _locationProvider;
+
         // Start is called before the first frame update
+        /*
         void Start()
         {
-            var coroutine = getParkLoc();
-            StartCoroutine(coroutine);
-        }
+
+        }*/
 
         // Update is called once per frame
         void Update()
@@ -32,6 +37,14 @@
         {
 
         }
+
+        private void Awake()
+        {
+            // Prevent double initialization of the map. 
+            //_map.InitializeOnStart = false;
+        }
+
+
 
         private IEnumerator getParkLoc()
         {
@@ -54,9 +67,31 @@
             else
             {
                 parkLocation = Conversions.StringToLatLon(parkLoc.downloadHandler.text);
+                Debug.Log("LOCATION2");
+                Debug.Log(parkLoc.downloadHandler.text);
                 var map = LocationProviderFactory.Instance.mapManager;
                 transform.localPosition = map.GeoToWorldPosition(parkLocation);
             }
+        }
+
+        protected virtual IEnumerator Start()
+        {
+            var coroutine = getParkLoc();
+            StartCoroutine(coroutine);
+            yield return null;
+            _locationProvider = LocationProviderFactory.Instance.DefaultLocationProvider;
+            _locationProvider.OnLocationUpdated += LocationProvider_OnLocationUpdated; ;
+        }
+
+        void LocationProvider_OnLocationUpdated(Unity.Location.Location location)
+        {
+            location.LatitudeLongitude = parkLocation;
+
+            Debug.Log("LOCATION");
+            Debug.Log(parkLocation);
+
+            _locationProvider.OnLocationUpdated -= LocationProvider_OnLocationUpdated;
+            _map.Initialize(location.LatitudeLongitude, _map.AbsoluteZoom);
         }
 
         private string getParkName()
