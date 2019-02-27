@@ -15,6 +15,7 @@ download() {
   curl -o `basename "$package"` "$url"
 }
 
+
 install() {
   package=$1
   download "$package"
