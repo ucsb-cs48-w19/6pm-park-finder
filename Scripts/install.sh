@@ -3,12 +3,12 @@
 # BASE_URL=https://netstorage.unity3d.com/unity
 # HASH=88d00a7498cd
 # VERSION=5.5.1f1
-VERSION=2018.3.4f1
+VERSION=2018.2.20f1
 # 2.17
 download() {
   file=$1
   # url="$BASE_URL/$HASH/$package"
-  url="https://download.unity3d.com/download_unity/88933597c842/MacEditorInstaller/Unity-2018.3.4f1.pkg?_ga=2.168044710.686183865.1550968454-48958660.1547513121"
+  url="https://download.unity3d.com/download_unity/cef3e6c0c622/MacEditorInstaller/Unity-2018.2.20f1.pkg"
 #url="https://download.unity3d.com/download_unity/bb579dc42f1d/UnityDownloadAssistant.dmg"
 
   echo "Downloading from $url: "
