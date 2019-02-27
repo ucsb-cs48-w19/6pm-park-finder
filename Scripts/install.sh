@@ -1,32 +1,38 @@
-#! /bin/sh
+TY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
+UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/46dda1414e51/MacEditorInstaller/Unity-2017.2.0f3.pkg"
+UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/46dda1414e51/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2017.2.0f3.pkg"
 
-# BASE_URL=https://netstorage.unity3d.com/unity
-# HASH=88d00a7498cd
-# VERSION=5.5.1f1
-VERSION=2018.3.11
 
+# Downloads a file if it does not exist
 download() {
-  file=$1
-  # url="$BASE_URL/$HASH/$package"
-  url="https://download.unity3d.com/download_unity/88933597c842/MacEditorInstaller/Unity-2018.2.17f1.pkg?_ga=2.168044710.686183865.1550968454-48958660.1547513121"
-#url="https://download.unity3d.com/download_unity/bb579dc42f1d/UnityDownloadAssistant.dmg"
 
-  echo "Downloading from $url: "
-  curl -o `basename "$package"` "$url"
+	URL=$1
+	FILE=`basename "$URL"`
+	
+	# Downloads a package if it does not already exist in cache
+	if [ ! -e $UNITY_DOWNLOAD_CACHE/`basename "$URL"` ] ; then
+		echo "$FILE does not exist. Downloading from $URL: "
+		mkdir -p "$UNITY_DOWNLOAD_CACHE"
+		curl -o $UNITY_DOWNLOAD_CACHE/`basename "$URL"` "$URL"
+	else
+		echo "$FILE Exists. Skipping download."
+	fi
 }
 
+# Downloads and installs a package from an internet URL
 install() {
-  package=$1
-  download "$package"
+	PACKAGE_URL=$1
+	download $1
 
-  echo "Installing "`basename "$package"`
-  sudo installer -dumplog -package `basename "$package"` -target /
+	echo "Installing `basename "$PACKAGE_URL"`"
+	sudo installer -dumplog -package $UNITY_DOWNLOAD_CACHE/`basename "$PACKAGE_URL"` -target /
 }
 
-# See $BASE_URL/$HASH/unity-$VERSION-$PLATFORM.ini for complete list
-# of available packages, where PLATFORM is `osx` or `win`
 
-install "MacEditorInstaller/Unity-$VERSION.pkg"
-install "MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-$VERSION.pkg"
-install "MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-$VERSION.pkg"
-install "MacEditorTargetInstaller/UnitySetup-Linux-Support-for-Editor-$VERSION.pkg"
+
+echo "Contents of Unity Download Cache:"
+ls $UNITY_DOWNLOAD_CACHE
+
+echo "Installing Unity..."
+install $UNITY_OSX_PACKAGE_URL
+install $UNITY_WINDOWS_TARGET_PACKAGE_URL
