@@ -33,7 +33,7 @@ public class SearchBar : MonoBehaviour
 
 	private Vector2d currentLocation = new Vector2d(0.0, 0.0) ;
 
-	void Start ()
+    void Start ()
 	{
 		// use DeviceLocationProvider instead of EditorLocationProvider for production
 		/* EditorLocationProvider dd = new EditorLocationProvider() ; */
@@ -43,6 +43,11 @@ public class SearchBar : MonoBehaviour
 		currentLocation = Conversions.LatLonToMeters(currentLocation) ;
         var coroutine = addSearchObjectsFromDatabase();
         StartCoroutine(coroutine);
+    }
+
+    public Vector2d getVector()
+    {
+        return currentLocation;
     }
 
     private void Update()
