@@ -14,6 +14,7 @@ public class LoadParkPage : MonoBehaviour
 
     public Text Name;
     public Text Description;
+    public Text test;
 
     // Start is called before the first frame update
     void Start()
