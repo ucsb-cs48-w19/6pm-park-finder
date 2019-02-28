@@ -6,9 +6,8 @@ using UnityEngine.TestTools;
 
 public class Test
 {
-    private static GameObject park;
+    private GameObject park;
 
-	[SetUp]
     public void SetUp()
     {
         park = Resources.Load("/Prefabs/Park") as GameObject;
@@ -24,10 +23,4 @@ public class Test
         //
         Assert.AreEqual(objectToTest.searchObject, park);
     }
-
-	public static void TestTest() {
-		Test tt = new Test() ;
-		tt.SetUp() ;
-		tt.Tests_correctSearchObject() ;
-	}
 }
