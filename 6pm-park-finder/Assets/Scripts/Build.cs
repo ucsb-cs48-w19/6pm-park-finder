@@ -9,7 +9,6 @@ public class Build : MonoBehaviour
 {
     public static void PerformBuild()
     {
-		Debug.Log("writing to file") ;
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = new[] { "Assets/Default.unity", "Assets/Search.unity", "Assets/ParkPage.unity" };
         buildPlayerOptions.locationPathName = "iOSBuild";
