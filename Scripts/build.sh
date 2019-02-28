@@ -20,4 +20,6 @@ echo "Unit test logs"
 cat $(pwd)/unity.log
 # cat $(pwd)/test.xml
 # exit if tests failed
-if [ $rc0 -ne 0 ]; then { echo "Failed unit tests"; exit $rc0; } fi
+if [ $rc0 -eq 0 ]; then { echo "Unit tests pass "; exit $rc0; } fi
+if [ $rc0 -eq 2]; then { echo "Some unit tests failed"; exit $rc0; } fi
+if [ $rc0 -eq 3 ]; then { echo "Failed unit tests"; exit $rc0; } fi
