@@ -1,4 +1,4 @@
-# Park-Finder
+# Park-Finder [![Build Status](https://travis-ci.org/ucsb-cs48-w19/6pm-park-finder.svg?branch=master)](https://travis-ci.org/ucsb-cs48-w19/6pm-park-finder) 
 
 ## Project summary
 
