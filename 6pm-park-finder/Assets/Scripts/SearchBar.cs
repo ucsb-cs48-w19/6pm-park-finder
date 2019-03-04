@@ -27,11 +27,12 @@ using Mapbox.Unity.Utilities;
         private static string phpUrl = "https://server-for-parkfinder.000webhostapp.com/get_park_names.php";
 
         public GameObject modelObject;
+        public List<SearchableObject> currentListings ;
 
-        public List<SearchableObject> searchObjects;
+        private List<SearchableObject> searchObjects = new List<SearchableObject>() ;
 
-        private List<SearchableObject> currentListings = new List<SearchableObject>();
-
+		private bool isLoc = false ;
+		private bool isLex = true ;
         private Vector2d currentLocation = new Vector2d(0.0, 0.0);
 
         void Start()
@@ -88,18 +89,17 @@ using Mapbox.Unity.Utilities;
                     double lat = double.Parse(ll[0], CultureInfo.InvariantCulture);
                     double lon = double.Parse(ll[1], CultureInfo.InvariantCulture);
                     GameObject objToAdd = Instantiate(modelObject) as GameObject;
-                    objToAdd.transform.SetParent(this.gameObject.transform);
+                    objToAdd.transform.SetParent(this.gameObject.transform, false);
                     objToAdd.name = parkName;
                     SearchBarObject ss = objToAdd.GetComponent<SearchBarObject>();
                     ss.setName();
                     ss.setLatLong(lat, lon);
                     ss.Distance = Vector2d.Distance(Conversions.LatLonToMeters(ss.getLatLong()), currentLocation);
-                    searchObjects.Add(new SearchableObject(objToAdd));
+                    currentListings.Add(new SearchableObject(objToAdd));
                 }
             }
-            SortLex();
-            currentListings.AddRange(searchObjects);
-            SetPositions();
+            ReorderLex() ;
+            searchObjects.AddRange(currentListings);
         }
 
         private bool IsInSearchableObjects(string nameToCheck)
@@ -129,36 +129,33 @@ using Mapbox.Unity.Utilities;
                 }
             }
             currentListings.AddRange(list);
-
-            SetPositions();
-        }
-
-        public void SetPositions()
-        {
-            if (currentListings.Count < 0)
-                return;
-            for (int i = 0; i < currentListings.Count; i++)
-            {
-                currentListings[i].searchObject.transform.localPosition = new Vector3(0, -(150 * i), 0);
-            }
+			
+			if (isLex)
+				ReorderLex() ;
+			else
+				ReorderLoc() ;
         }
 
         public void ReorderLex()
         {
+			SetOrder(true) ;
             currentListings.Sort((x, y) => x.searchObject.name.CompareTo(y.searchObject.name));
-            SetPositions();
+			for (int ii = 0 ; ii < currentListings.Count ; ii++) 
+				currentListings[ii].searchObject.transform.SetSiblingIndex(ii) ;
 
         }
         public void ReorderLoc()
         {
+			SetOrder(false) ;
             currentListings.Sort((x, y) => x.searchObject.GetComponent<SearchBarObject>().Distance.CompareTo(y.searchObject.GetComponent<SearchBarObject>().Distance));
-            SetPositions();
+			for (int ii = 0 ; ii < currentListings.Count ; ii++) 
+				currentListings[ii].searchObject.transform.SetSiblingIndex(ii) ;
         }
 
-        void SortLex()
-        {
-            searchObjects.Sort((x, y) => x.searchObject.name.CompareTo(y.searchObject.name));
-        }
+		private void SetOrder(bool isLex) {
+			this.isLex = isLex ;
+			this.isLoc = !isLex ;
+		}
 
 
 }
