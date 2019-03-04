@@ -11,6 +11,7 @@ public class UpdateRatings : MonoBehaviour
     private static string phpUrl2 = "https://server-for-parkfinder.000webhostapp.com/update_ratings.php";
     private static int numRatings;
     private static double ratingsTotal;
+	private bool focus = false ;
 
 
     // Start is called before the first frame update
@@ -27,20 +28,25 @@ public class UpdateRatings : MonoBehaviour
 
     private void Update()
     {
-        InputField field = GameObject.Find("InputRatings").GetComponent<InputField>();
-        if (field.isFocused && field.text != "" && Input.GetKey(KeyCode.Return))
+        InputField field = this.gameObject.GetComponent<InputField>();
+		double temp ;
+        if (focus && field.text != "" && Input.GetKey(KeyCode.Return))
         {
-            if (verifyInput(field.text))
+			Debug.Log("Input is taken") ;
+            if (double.TryParse(field.text, out temp) && verifyInput(field.text))
             {
                 var coroutine2 = UpdateRatingsDB(field.text);
                 StartCoroutine(coroutine2);
-                field.text = "";
+				field.text = "Thank you" ;
             }
             else
             {
-                field.text = "BAD INPUT";
+				field.text = "BAD INPUT" ;
             }
+			focus = false ;
         }
+		else
+			focus = field.isFocused ;
     }
 
     private IEnumerator UpdateRatingsDB(string newRating)
