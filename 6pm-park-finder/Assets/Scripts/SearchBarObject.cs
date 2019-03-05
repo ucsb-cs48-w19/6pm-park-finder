@@ -23,6 +23,12 @@ using Mapbox.Utils;
             }
         }
 
+		// will be updated in SearchBar.cs only
+		public double Rating {
+			get ;
+			set ;
+		}
+
         public void setName()
         {
             nameText.text = this.name;

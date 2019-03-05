@@ -34,6 +34,8 @@ using Mapbox.Unity.Utilities;
 		private bool isLoc = false ;
 		private bool isLex = true ;
         private Vector2d currentLocation = new Vector2d(0.0, 0.0);
+		private enum Order {Lex, Loc, Rat} ;
+		private int order = (int) Order.Lex ;
 
         void Start()
         {
@@ -81,11 +83,15 @@ using Mapbox.Unity.Utilities;
                 Debug.Log(parkNames.downloadHandler.text);
                 //description = parkCharacteristics.downloadHandler.text;
                 string[] ParkNamesLocs = parkNames.downloadHandler.text.Split('\n');
-                for (int ii = 0; ii < ParkNamesLocs.Length; ii += 2)
+                for (int ii = 0; ii < ParkNamesLocs.Length; ii += 3)
                 {
                     string parkName = ParkNamesLocs[ii];
-                    if (parkName == "") continue;
+                    if (parkName == "") {
+						ii -= 2 ;
+						continue;
+					}
                     string[] ll = ParkNamesLocs[ii + 1].Split(',');
+					string[] rating = ParkNamesLocs[ii + 2].Split(':') ;
                     double lat = double.Parse(ll[0], CultureInfo.InvariantCulture);
                     double lon = double.Parse(ll[1], CultureInfo.InvariantCulture);
                     GameObject objToAdd = Instantiate(modelObject) as GameObject;
@@ -95,6 +101,8 @@ using Mapbox.Unity.Utilities;
                     ss.setName();
                     ss.setLatLong(lat, lon);
                     ss.Distance = Vector2d.Distance(Conversions.LatLonToMeters(ss.getLatLong()), currentLocation);
+					/* ss.Rating = GetAverageRating(double.Parse(rating[0], CultureInfo.InvariantCulture), (int) double.Parse(rating[1], CultureInfo.InvariantCulture)) ; */
+					ss.Rating = GetAverageRating(Convert.ToDouble(rating[0]), Convert.ToInt32(rating[1])) ;
                     currentListings.Add(new SearchableObject(objToAdd));
                 }
             }
@@ -130,15 +138,12 @@ using Mapbox.Unity.Utilities;
             }
             currentListings.AddRange(list);
 			
-			if (isLex)
-				ReorderLex() ;
-			else
-				ReorderLoc() ;
+			Reorder() ;
         }
 
         public void ReorderLex()
         {
-			SetOrder(true) ;
+			order = (int) Order.Lex ;
             currentListings.Sort((x, y) => x.searchObject.name.CompareTo(y.searchObject.name));
 			for (int ii = 0 ; ii < currentListings.Count ; ii++) 
 				currentListings[ii].searchObject.transform.SetSiblingIndex(ii) ;
@@ -146,15 +151,39 @@ using Mapbox.Unity.Utilities;
         }
         public void ReorderLoc()
         {
-			SetOrder(false) ;
+			order = (int) Order.Loc ;
             currentListings.Sort((x, y) => x.searchObject.GetComponent<SearchBarObject>().Distance.CompareTo(y.searchObject.GetComponent<SearchBarObject>().Distance));
 			for (int ii = 0 ; ii < currentListings.Count ; ii++) 
 				currentListings[ii].searchObject.transform.SetSiblingIndex(ii) ;
         }
 
-		private void SetOrder(bool isLex) {
-			this.isLex = isLex ;
-			this.isLoc = !isLex ;
+		public void ReorderRat()
+		{
+			order = (int) Order.Rat ;
+			currentListings.Sort((x, y) => -(x.searchObject.GetComponent<SearchBarObject>().Rating.CompareTo(y.searchObject.GetComponent<SearchBarObject>().Rating)));
+			for (int ii = 0 ; ii < currentListings.Count ; ii++) 
+				currentListings[ii].searchObject.transform.SetSiblingIndex(ii) ;
+
+		}
+
+		private void Reorder() {
+			switch (order) {
+				case (int) Order.Lex:
+					ReorderLex() ;
+					break ;
+				case (int) Order.Loc:
+					ReorderLoc() ;
+					break ;
+				case (int) Order.Rat:
+					ReorderRat() ;
+					break ;
+			}
+		}
+
+		private double GetAverageRating(double total, int count)
+		{
+			if (count == 0) return -0.1 ;
+			return total / count ;
 		}
 
 
