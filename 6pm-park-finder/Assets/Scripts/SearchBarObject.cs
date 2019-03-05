@@ -23,6 +23,15 @@ using Mapbox.Utils;
             }
         }
 
+<<<<<<< HEAD
+=======
+		// will be updated in SearchBar.cs only
+		public double Rating {
+			get ;
+			set ;
+		}
+
+>>>>>>> bd3c88848cebe166fd90eeac856ff43c2a5301ec
         public void setName()
         {
             nameText.text = this.name;
@@ -39,4 +48,8 @@ using Mapbox.Utils;
             return latLong;
         }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bd3c88848cebe166fd90eeac856ff43c2a5301ec

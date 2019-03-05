@@ -234,6 +234,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
     m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
@@ -241,6 +242,15 @@ MonoBehaviour:
     m_MaxSize: 100
     m_Alignment: 1
     m_AlignByGeometry: 1
+=======
+    m_FontSize: 12
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 12
+    m_MaxSize: 73
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+>>>>>>> bd3c88848cebe166fd90eeac856ff43c2a5301ec
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
