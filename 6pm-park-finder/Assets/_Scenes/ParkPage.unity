@@ -565,12 +565,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887032157}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a4215c4a34b54170897ac2dfac9c42f, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 887032156}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &887032159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +591,19 @@ MonoBehaviour:
   _spawnScale: 5
   _markerPrefab: {fileID: 7157473025082153690, guid: cc8f8585b3dc94f9c980c40a12b7a0f7,
     type: 3}
+--- !u!114 &887032160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887032157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e38cdd0e334c7287d42564145da80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 887032156}
 --- !u!1 &894411124
 GameObject:
   m_ObjectHideFlags: 0
