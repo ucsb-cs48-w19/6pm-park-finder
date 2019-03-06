@@ -47,7 +47,7 @@ If you want to use our app on an actual iPhone device, you must have at least iO
 
 To use our app, first open it up. Then, you will see three buttons on the bottom bar: a magnifying glass (Search), a house (Home), and an i in a circle (Info). You can click the house to go to the Home page, where you'll see a map with parks in IV. That map has other functionality as well (you can type a location in the top right and press enter and it will take you there). You can drag around to see park locations.
 
-Next, click the magnifying glass. You'll see a scrollable view of park names and a search bar (for which search can be ordered by park name, proximity to you, and park rating by clicking the buttons directly below the search field). Select any park and it'll take you to that park's park page.
+Next, click the magnifying glass. You'll see a scrollable view of park names and a search bar (for which search can be ordered by park name, proximity to you, and park rating by clicking the buttons directly below the search field). Select any park and it'll take you to that park's park page. (You can also get to the last park page visited by pressing the Info button.)
 
 On the park page, you will see info pertaining to that particular park. You'll see a map showing the location of the park and a description of the park below that map. You can also rate the park on a scale of 1 to 5! The rating shows up both in the form of stars and as a number out of 5.
 
