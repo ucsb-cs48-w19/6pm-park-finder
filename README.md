@@ -43,16 +43,18 @@ In Unity, File > Build Settings and make sure Platform is set to iOS.
 Click Build and Run. Unity will take you to XCode, from which you should click the 'Play' arrow in the top left to build and run. Then, you can see development changes on a real iPhone!
 
 ## Functionality
+If you want to use our app on an actual iPhone device, you must have at least iOS 8.0.0.
 
-Using IOS at least 8.0.0
+To use our app, first open it up. Then, you will see three buttons on the bottom bar: a magnifying glass (Search), a house (Home), and an i in a circle (Info). You can click the house to go to the Home page, where you'll see a map with parks in IV. That map has other functionality as well (you can type a location in the top right and press enter and it will take you there). You can drag around to see park locations.
 
-Open app from IPhone
+Next, click the magnifying glass. You'll see a scrollable view of park names and a search bar (for which search can be ordered by park name, proximity to you, and park rating by clicking the buttons directly below the search field). Select any park and it'll take you to that park's park page.
 
-Map should come up
+On the park page, you will see info pertaining to that particular park. You'll see a map showing the location of the park and a description of the park below that map. You can also rate the park on a scale of 1 to 5! The rating shows up both in the form of stars and as a number out of 5.
+
+And that's our app! We hope you enjoy the functionality.
 
 ## Known Problems
-
-None
+Sometimes, the map can take a long time to render, which can be frustrating for the user.
 
 ## Contributing
 
