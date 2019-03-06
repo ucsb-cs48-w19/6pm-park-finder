@@ -54,7 +54,7 @@ On the park page, you will see info pertaining to that particular park. You'll s
 And that's our app! We hope you enjoy the functionality.
 
 ## Known Problems
-Sometimes, the map can take a long time to render, which can be frustrating for the user.
+Sometimes, the map can take a long time to render as it's being dragged around, which can be frustrating for the user.
 
 ## Contributing
 
