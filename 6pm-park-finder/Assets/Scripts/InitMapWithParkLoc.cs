@@ -87,14 +87,10 @@
 
         void LocationProvider_OnLocationUpdated(Unity.Location.Location location)
         {
-            location.LatitudeLongitude = parkLocation;
-
-            Debug.Log("LOCATION");
-            Debug.Log(parkLocation);
-
             _locationProvider.OnLocationUpdated -= LocationProvider_OnLocationUpdated;
             _map.Initialize(location.LatitudeLongitude, _map.AbsoluteZoom);
         }
+
 
         private string getParkName()
         {
