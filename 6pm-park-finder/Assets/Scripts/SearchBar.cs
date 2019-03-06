@@ -37,8 +37,20 @@ using Mapbox.Unity.Utilities;
 		private enum Order {Lex, Loc, Rat} ;
 		private int order = (int) Order.Lex ;
 
-        void Start()
+
+        protected List<string> names = new List<string>() {"Sort By", "Distance", "Alphabetical”, “Rating" };
+        public Dropdown SortBy;
+
+
+
+         void PopulateList()
         {
+            SortBy.AddOptions(names);
+        }
+
+
+        void Start()
+            {
             // use DeviceLocationProvider instead of EditorLocationProvider for production
             /* EditorLocationProvider dd = new EditorLocationProvider() ; */
             /* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
@@ -47,18 +59,19 @@ using Mapbox.Unity.Utilities;
             currentLocation = Conversions.LatLonToMeters(currentLocation);
             var coroutine = addSearchObjectsFromDatabase();
             StartCoroutine(coroutine);
+            PopulateList();
 
-        }
+            }
 
-        private void Update()
-        {
+            private void Update()
+            {
             /* EditorLocationProvider dd = new EditorLocationProvider() ; */
             /* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
 
-        }
+            }
 
-        private IEnumerator addSearchObjectsFromDatabase()
-        {
+            private IEnumerator addSearchObjectsFromDatabase()
+            {
             Debug.Log("IN ADD SEARCH OBJECTS");
             //make a database query
             //returns the description
@@ -185,6 +198,18 @@ using Mapbox.Unity.Utilities;
 			if (count == 0) return -0.1 ;
 			return total / count ;
 		}
+        
+        
+        public void Dropdown_IndexChanged(int index)
+         {
+            if (index == 1)
+                ReorderLoc();
 
+            if (index == 2)
+                ReorderLex();
+
+            if (index == 3)
+                ReorderRat();
+          }
 
 }
