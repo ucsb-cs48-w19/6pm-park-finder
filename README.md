@@ -34,7 +34,7 @@ Double click the Default Scene and press play in the game tab to see the app in 
 If you want to build to Android, you can download the Android SDK along with Android studio at this link: https://developer.android.com/studio.
 Make sure that the path to the SDK is configured correctly. On Mac, the default correct configuration is /Users/<nameOfUser>/Library/Android/sdk and on Windows it's C:\Users\username\AppData\Local\Android\Sdk. 
 Then, plug your Android into the computer, select File > Build Settings and make sure Platform is set to Android.
-Then, click Build and Run in the Unity Editor, and you can see any development changes on a real Android device!
+Then, click Build and Run in the Unity Editor, and you can see any development changes on a real Android device (on the Unity Remote app)!
 
 If you want to build to iOS, you can download the latest version XCode here: https://developer.apple.com/xcode/
 Note that XCode 10 (the latest version of XCode) can only build to iPhones with iOS 12.0+ and the Mac running the build must have OS 10.13.0+. The app is still executable on iOS 8.0.0+ when using prior versions of XCode.
