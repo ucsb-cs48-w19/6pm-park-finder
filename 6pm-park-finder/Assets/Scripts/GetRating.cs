@@ -86,11 +86,14 @@ public class GetRating : MonoBehaviour
 	private void PrintStars() {
 		int numStars = (int) Math.Round(rating, MidpointRounding.AwayFromZero) ;
 		for (int ii = 0 ; ii < 5 ; ii++) {
-			GameObject go ;
-			if (ii < numStars)
-				go = Instantiate(star, new Vector3(52 + 45 * ii, 0, 0), Quaternion.identity) ;
-			else
-				go = Instantiate(emptyStar, new Vector3(52 + 45 * ii, 0, 0), Quaternion.identity) ;
+            GameObject go;
+
+            if (ii < numStars)
+                go = Instantiate(star, new Vector3(52 + 45 * ii, 0, 0), Quaternion.identity);
+             
+           
+            else
+                go = Instantiate(emptyStar, new Vector3(52 + 45 * ii, 0, 0), Quaternion.identity);
 
 			go.transform.SetParent(this.gameObject.transform, false) ;
 		}
