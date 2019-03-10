@@ -12,6 +12,7 @@ public class UpdateRatings : MonoBehaviour
     private static int numRatings;
     private static double ratingsTotal;
 	private bool focus = false ;
+	private TouchScreenKeyboard mobile ;
 
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class UpdateRatings : MonoBehaviour
     {
         InputField field = this.gameObject.GetComponent<InputField>();
 		double temp ;
-        if (focus && field.text != "" && (Input.GetKey(KeyCode.Return) || Input.GetKey("66")))
+        if (focus && field.text != "" && (Input.GetKey(KeyCode.Return) || mobile.done))
         {
 			Debug.Log("Input is taken") ;
             if (double.TryParse(field.text, out temp) && verifyInput(field.text))
@@ -48,6 +49,10 @@ public class UpdateRatings : MonoBehaviour
 		else
 			focus = field.isFocused ;
     }
+
+	public void OnInputEvent() {
+		mobile = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false) ;
+	}
 
     private IEnumerator UpdateRatingsDB(string newRating)
     {
