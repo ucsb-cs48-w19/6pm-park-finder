@@ -30,7 +30,7 @@ public class UpdateRatings : MonoBehaviour
     {
         InputField field = this.gameObject.GetComponent<InputField>();
 		double temp ;
-        if (focus && field.text != "" && Input.GetKey(KeyCode.Return))
+        if (focus && field.text != "" && (Input.GetKey(KeyCode.Return) || Input.GetKey("66")))
         {
 			Debug.Log("Input is taken") ;
             if (double.TryParse(field.text, out temp) && verifyInput(field.text))
