@@ -40,22 +40,23 @@ using Mapbox.Unity.Utilities;
         void Start()
         {
             // use DeviceLocationProvider instead of EditorLocationProvider for production
-            /* EditorLocationProvider dd = new EditorLocationProvider() ; */
-            /* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
-            currentLocation[0] = 34.413963;
-            currentLocation[1] = -119.848946;
-            currentLocation = Conversions.LatLonToMeters(currentLocation);
+            /* var dd = new DefaultDeviceLocationProvider() ; */
+			var dd = LocationProviderFactory.Instance.DefaultLocationProvider ;
+            currentLocation = Conversions.LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ;
+            /* currentLocation[0] = 34.413963; */
+            /* currentLocation[1] = -119.848946; */
+            /* currentLocation = Conversions.LatLonToMeters(currentLocation); */
             var coroutine = addSearchObjectsFromDatabase();
             StartCoroutine(coroutine);
 
         }
 
-        private void Update()
-        {
-            /* EditorLocationProvider dd = new EditorLocationProvider() ; */
-            /* currentLocation = LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; */
+        /* private void Update() */
+        /* { */
+        /*     /1* DeviceLocationProvider dd = new DeviceLocationProvider() ; *1/ */
+        /*     /1* currentLocation = Conversions.LatLonToMeters(dd.CurrentLocation.LatitudeLongitude) ; *1/ */
 
-        }
+        /* } */
 
         private IEnumerator addSearchObjectsFromDatabase()
         {
@@ -80,7 +81,7 @@ using Mapbox.Unity.Utilities;
                 // show the highscores
                 // update distances only on loading of scene
                 Debug.Log("ABOUT TO PRINT OBJECT");
-                Debug.Log(parkNames.downloadHandler.text);
+                /* Debug.Log(parkNames.downloadHandler.text); */
                 //description = parkCharacteristics.downloadHandler.text;
                 string[] ParkNamesLocs = parkNames.downloadHandler.text.Split('\n');
                 for (int ii = 0; ii < ParkNamesLocs.Length; ii += 3)
@@ -101,6 +102,8 @@ using Mapbox.Unity.Utilities;
                     ss.setName();
                     ss.setLatLong(lat, lon);
                     ss.Distance = Vector2d.Distance(Conversions.LatLonToMeters(ss.getLatLong()), currentLocation);
+					Debug.Log(parkName) ;
+					Debug.Log(ss.Distance) ;
 					/* ss.Rating = GetAverageRating(double.Parse(rating[0], CultureInfo.InvariantCulture), (int) double.Parse(rating[1], CultureInfo.InvariantCulture)) ; */
 					ss.Rating = GetAverageRating(Convert.ToDouble(rating[0]), Convert.ToInt32(rating[1])) ;
                     currentListings.Add(new SearchableObject(objToAdd));
