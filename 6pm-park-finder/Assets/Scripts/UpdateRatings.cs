@@ -33,7 +33,6 @@ public class UpdateRatings : MonoBehaviour
 		double temp ;
         if (focus && field.text != "" && (Input.GetKey(KeyCode.Return) || mobile.done))
         {
-			Debug.Log("Input is taken") ;
             if (double.TryParse(field.text, out temp) && verifyInput(field.text))
             {
                 var coroutine2 = UpdateRatingsDB(field.text);
@@ -70,12 +69,6 @@ public class UpdateRatings : MonoBehaviour
         if(updateParkRatings.isNetworkError || updateParkRatings.isHttpError)
         {
             print("Error updating ratings: " + updateParkRatings.error);
-            Debug.Log("ERROR");
-        }
-        else
-        {
-            Debug.Log(updateParkRatings.downloadHandler.text);
-            Debug.Log("Ratings Updated");
         }
     }
 
@@ -91,18 +84,14 @@ public class UpdateRatings : MonoBehaviour
         if (parkRating.isNetworkError || parkRating.isHttpError)
         {
             print("Error downloading: " + parkRating.error);
-            Debug.Log("ERROR");
         }
         else
         {
-            Debug.Log("ABOUT TO PRINT OBJECT");
-            Debug.Log(parkRating.downloadHandler.text);
 
             string[] results = parkRating.downloadHandler.text.Split('\n');
             ratingsTotal = Convert.ToDouble(results[0]);
             numRatings = Convert.ToInt32(results[1]);
 
-            //averageRating = GetOldAverageRating();
         }
 
     }
@@ -120,7 +109,6 @@ public class UpdateRatings : MonoBehaviour
             }
             retStr += c;
         }
-        Debug.Log(retStr);
 
         return retStr;
     }

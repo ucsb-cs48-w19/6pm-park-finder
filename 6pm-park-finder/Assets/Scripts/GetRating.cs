@@ -21,12 +21,6 @@ public class GetRating : MonoBehaviour
 		
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private IEnumerator Rate()
     {
         WWWForm form = new WWWForm();
@@ -39,18 +33,13 @@ public class GetRating : MonoBehaviour
         if (parkRating.isNetworkError || parkRating.isHttpError)
         {
             print("Error downloading: " + parkRating.error);
-            Debug.Log("ERROR");
         }
         else
         {
-            Debug.Log("GetRating success");
-            Debug.Log(parkRating.downloadHandler.text);
-
             string []results = parkRating.downloadHandler.text.Split('\n');
             double ratingsTotal = Convert.ToDouble(results[0]);
             int numRatings = Convert.ToInt32(results[1]);
 
-            /* Text textField = GameObject.Find("CurrentRating").GetComponent<Text>(); */
             Text textField = this.gameObject.GetComponent<Text>();
 			rating = GetAverageRating(ratingsTotal, numRatings) ;
 			if (rating < 0)

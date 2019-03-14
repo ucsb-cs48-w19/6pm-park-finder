@@ -26,7 +26,7 @@ None
 
 ### Installation Steps
 
-Install Unity 2018.3.0. Make sure to include the iOS module when installing. 
+Install Unity 2018.3.0. Make sure to include the iOS and/or Android module when installing. 
 If Unity is already installed you may need to download the iOS module through File / Build Settings 
 After cloning this repo, open the repo directory on master through Unity. You may develop through the Unity app. 
 Double click the Default Scene and press play in the game tab to see the app in action on your computer.

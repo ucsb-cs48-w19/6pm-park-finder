@@ -18,21 +18,14 @@ public class LoadParkPage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("IN START FUNCTIN");
         Name.text = GetName();
         IEnumerator coroutine = GetDescription();
         StartCoroutine(coroutine);
         Description.text = description;
     }
 
-    /* private void Update() */
-    /* { */
-    /*     Description.text = description; */
-    /* } */
-
     private IEnumerator GetDescription()
     {
-        //Debug.Log("IN DATABASE FUNCTION");
         //query database
         WWWForm form = new WWWForm();
 
@@ -42,29 +35,21 @@ public class LoadParkPage : MonoBehaviour
 
         //returns the description
         var parkCharacteristics = UnityWebRequest.Post(phpUrl, form);
-        //WWW parkCharacteristics = new WWW(phpUrl, form);
 
         yield return parkCharacteristics.SendWebRequest();
-        //yield return parkCharacteristics;
 
 
         if (parkCharacteristics.isNetworkError || parkCharacteristics.isHttpError)
         {
             print("Error downloading: " + parkCharacteristics.error);
             description = "error";
-            Debug.Log("ERROR");
         }
         else
         {
             // show the highscores
-            Debug.Log("ABOUT TO PRINT OBJECT");
-            Debug.Log(parkCharacteristics.downloadHandler.text);
             description = parkCharacteristics.downloadHandler.text;
         }
 		Description.text = description ;
-
-        //Debug.Log("ABOUT TO PRINT OBJECT");
-        //Debug.Log(parkCharacteristics.text);
 
     }
 
@@ -81,7 +66,6 @@ public class LoadParkPage : MonoBehaviour
             }
             retStr += c;
         }
-        Debug.Log(retStr);
 
         return retStr;
     }
